@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "values": [
+      {
+        "Community Plan Area": "Westchester - Playa del Rey",
+        "Proposed Units": 1090,
+        "Approved Units": 342,
+        "Project Count": 6
+      },
+      {
+        "Community Plan Area": "West Los Angeles",
+        "Proposed Units": 900,
+        "Approved Units": 794,
+        "Project Count": 11
+      },
+      {
+        "Community Plan Area": "Palms - Mar Vista - Del Rey",
+        "Proposed Units": 563,
+        "Approved Units": 554,
+        "Project Count": 11
+      }
+    ]
+  },
+  "transform": [
+    {"fold": ["Proposed Units", "Approved Units"], "as": ["Type", "Units"]}
+  ],
+  "facet": {
+    "field": "Community Plan Area",
+    "type": "nominal",
+    "columns": 3,
+    "title": "CD 11 Breakdown by Community Plan Area"
+  },
+  "spec": {
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "Type", "type": "nominal", "title": null},
+      "y": {"field": "Units", "type": "quantitative", "title": "Units"},
+      "color": {"field": "Type", "type": "nominal", "legend": null},
+      "tooltip": [
+        {"field": "Community Plan Area", "type": "nominal"},
+        {"field": "Type", "type": "nominal"},
+        {"field": "Units", "type": "quantitative"},
+        {"field": "Project Count", "type": "quantitative"}
+      ]
+    }
+  },
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

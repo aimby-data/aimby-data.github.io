@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "values": [
+      {
+        "Community Plan Area": "Wilshire",
+        "Proposed Units": 5552,
+        "Approved Units": 4368,
+        "projectCount": 72
+      },
+      {
+        "Community Plan Area": "South Los Angeles",
+        "Proposed Units": 5381,
+        "Approved Units": 4652,
+        "projectCount": 78
+      },
+      {
+        "Community Plan Area": "Hollywood",
+        "Proposed Units": 4977,
+        "Approved Units": 3459,
+        "projectCount": 46
+      },
+      {
+        "Community Plan Area": "West Adams - Baldwin Hills - Leimert",
+        "Proposed Units": 3494,
+        "Approved Units": 2586,
+        "projectCount": 49
+      },
+      {
+        "Community Plan Area": "Southeast Los Angeles",
+        "Proposed Units": 3282,
+        "Approved Units": 3192,
+        "projectCount": 50
+      },
+      {
+        "Community Plan Area": "Westlake",
+        "Proposed Units": 2640,
+        "Approved Units": 1997,
+        "projectCount": 31
+      },
+      {
+        "Community Plan Area": "West Los Angeles",
+        "Proposed Units": 2325,
+        "Approved Units": 1253,
+        "projectCount": 21
+      },
+      {
+        "Community Plan Area": "Van Nuys - North Sherman Oaks",
+        "Proposed Units": 1846,
+        "Approved Units": 1397,
+        "projectCount": 25
+      },
+      {
+        "Community Plan Area": "Canoga Park - Winnetka - Woodland Hills - West Hills",
+        "Proposed Units": 1833,
+        "Approved Units": 1823,
+        "projectCount": 9
+      },
+      {
+        "Community Plan Area": "North Hollywood - Valley Village",
+        "Proposed Units": 1513,
+        "Approved Units": 1321,
+        "projectCount": 28
+      },
+      {
+        "Community Plan Area": "Westwood",
+        "Proposed Units": 1176,
+        "Approved Units": 0,
+        "projectCount": 3
+      },
+      {
+        "Community Plan Area": "Westchester - Playa del Rey",
+        "Proposed Units": 1090,
+        "Approved Units": 342,
+        "projectCount": 6
+      },
+      {
+        "Community Plan Area": "Reseda - West Van Nuys",
+        "Proposed Units": 978,
+        "Approved Units": 973,
+        "projectCount": 12
+      },
+      {
+        "Community Plan Area": "Sherman Oaks - Studio City - Toluca Lake - Cahuenga Pass",
+        "Proposed Units": 941,
+        "Approved Units": 822,
+        "projectCount": 10
+      },
+      {
+        "Community Plan Area": "Northeast Los Angeles",
+        "Proposed Units": 868,
+        "Approved Units": 752,
+        "projectCount": 14
+      },
+      {
+        "Community Plan Area": "Palms - Mar Vista - Del Rey",
+        "Proposed Units": 799,
+        "Approved Units": 706,
+        "projectCount": 15
+      },
+      {
+        "Community Plan Area": "Silver Lake - Echo Park - Elysian Valley",
+        "Proposed Units": 780,
+        "Approved Units": 791,
+        "projectCount": 9
+      },
+      {
+        "Community Plan Area": "Arleta - Pacoima",
+        "Proposed Units": 580,
+        "Approved Units": 522,
+        "projectCount": 4
+      },
+      {
+        "Community Plan Area": "Boyle Heights",
+        "Proposed Units": 578,
+        "Approved Units": 625,
+        "projectCount": 12
+      },
+      {
+        "Community Plan Area": "Sylmar",
+        "Proposed Units": 567,
+        "Approved Units": 655,
+        "projectCount": 3
+      },
+      {
+        "Community Plan Area": "Sun Valley - La Tuna Canyon",
+        "Proposed Units": 478,
+        "Approved Units": 478,
+        "projectCount": 5
+      },
+      {
+        "Community Plan Area": "Mission Hills - Panorama City - North Hills",
+        "Proposed Units": 467,
+        "Approved Units": 467,
+        "projectCount": 4
+      },
+      {
+        "Community Plan Area": "Central City",
+        "Proposed Units": 350,
+        "Approved Units": 217,
+        "projectCount": 5
+      },
+      {
+        "Community Plan Area": "San Pedro",
+        "Proposed Units": 299,
+        "Approved Units": 299,
+        "projectCount": 6
+      },
+      {
+        "Community Plan Area": "Wilmington - Harbor City",
+        "Proposed Units": 139,
+        "Approved Units": 136,
+        "projectCount": 3
+      },
+      {
+        "Community Plan Area": "Encino - Tarzana",
+        "Proposed Units": 117,
+        "Approved Units": 123,
+        "projectCount": 1
+      },
+      {
+        "Community Plan Area": "Central City North",
+        "Proposed Units": 112,
+        "Approved Units": 125,
+        "projectCount": 3
+      },
+      {
+        "Community Plan Area": "Harbor Gateway",
+        "Proposed Units": 70,
+        "Approved Units": 70,
+        "projectCount": 2
+      },
+      {
+        "Community Plan Area": "Granada Hills - Knollwood",
+        "Proposed Units": 65,
+        "Approved Units": 84,
+        "projectCount": 2
+      },
+      {
+        "Community Plan Area": "Sunland - Tujunga - Lake View Terrace - Shadow Hills - East La Tuna Canyon",
+        "Proposed Units": 63,
+        "Approved Units": 63,
+        "projectCount": 1
+      }
+    ]
+  },
+  "transform": [
+    {"fold": ["Proposed Units", "Approved Units"], "as": ["unitType", "units"]}
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "aggregate": "sum",
+      "field": "units",
+      "type": "quantitative",
+      "title": "Units"
+    },
+    "y": {
+      "field": "Community Plan Area",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "Community Plan Area"
+    },
+    "color": {"field": "unitType", "type": "nominal", "title": null},
+    "tooltip": [
+      {
+        "field": "Community Plan Area",
+        "type": "nominal",
+        "title": "Community Plan Area"
+      },
+      {"field": "unitType", "type": "nominal", "title": "Type"},
+      {"field": "units", "type": "quantitative", "title": "Units"},
+      {
+        "field": "projectCount",
+        "type": "quantitative",
+        "title": "Project Count"
+      }
+    ]
+  },
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

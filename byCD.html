@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "values": [
+      {
+        "Council District": "CD 13",
+        "Proposed Units": 6089,
+        "Approved Units": 4818,
+        "Project Count": 69
+      },
+      {
+        "Council District": "CD 8",
+        "Proposed Units": 5888,
+        "Approved Units": 4778,
+        "Project Count": 86
+      },
+      {
+        "Council District": "CD 5",
+        "Proposed Units": 4583,
+        "Approved Units": 2144,
+        "Project Count": 38
+      },
+      {
+        "Council District": "CD 1",
+        "Proposed Units": 4483,
+        "Approved Units": 3540,
+        "Project Count": 58
+      },
+      {
+        "Council District": "CD 10",
+        "Proposed Units": 4309,
+        "Approved Units": 3314,
+        "Project Count": 59
+      },
+      {
+        "Council District": "CD 9",
+        "Proposed Units": 3442,
+        "Approved Units": 3163,
+        "Project Count": 48
+      },
+      {
+        "Council District": "CD 11",
+        "Proposed Units": 2553,
+        "Approved Units": 1690,
+        "Project Count": 28
+      },
+      {
+        "Council District": "CD 6",
+        "Proposed Units": 2358,
+        "Approved Units": 1974,
+        "Project Count": 29
+      },
+      {
+        "Council District": "CD 4",
+        "Proposed Units": 2188,
+        "Approved Units": 1785,
+        "Project Count": 23
+      },
+      {
+        "Council District": "CD 2",
+        "Proposed Units": 2119,
+        "Approved Units": 1870,
+        "Project Count": 36
+      },
+      {
+        "Council District": "CD 3",
+        "Proposed Units": 2023,
+        "Approved Units": 2013,
+        "Project Count": 10
+      },
+      {
+        "Council District": "CD 14",
+        "Proposed Units": 1281,
+        "Approved Units": 1131,
+        "Project Count": 21
+      },
+      {
+        "Council District": "CD 7",
+        "Proposed Units": 1210,
+        "Approved Units": 1240,
+        "Project Count": 8
+      },
+      {
+        "Council District": "CD 15",
+        "Proposed Units": 769,
+        "Approved Units": 754,
+        "Project Count": 14
+      },
+      {
+        "Council District": "CD 12",
+        "Proposed Units": 65,
+        "Approved Units": 84,
+        "Project Count": 2
+      }
+    ]
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Project Count",
+      "type": "quantitative",
+      "title": "Number of Projects"
+    },
+    "y": {
+      "field": "Council District",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "Council District"
+    },
+    "color": {"field": "Council District", "type": "nominal", "legend": null},
+    "tooltip": [
+      {"field": "Council District", "type": "nominal"},
+      {"field": "Project Count", "type": "quantitative"},
+      {"field": "Proposed Units", "type": "quantitative"},
+      {"field": "Approved Units", "type": "quantitative"}
+    ]
+  },
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
